@@ -14,6 +14,5 @@ class Kompas extends BaseHandler implements HandlerContract
 {
 	public function __construct()
 	{
-		
 	}
 }
