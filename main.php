@@ -31,7 +31,6 @@ while (true) {
                 ":title" => $value,
                 ":created_at" => time()
             ]);
-        ) 
         }
 
         echo $instanceName . " : " . PHP_EOL;
