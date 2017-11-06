@@ -29,7 +29,7 @@ while (true) {
                 ":title" => $result,
                 ":created_at" => time()
             ]
-        );
+        ) or die($st->errorInfo());
 
         echo $instanceName . " : " . PHP_EOL;
         $i = 1;
