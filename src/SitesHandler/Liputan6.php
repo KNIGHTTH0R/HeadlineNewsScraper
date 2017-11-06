@@ -11,7 +11,7 @@ use IceTea\Contracts\SitesHandler\Handler as HandlerContract;
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
  * @license MIT
  */
-class Kompas extends BaseHandler implements HandlerContract
+class Liputan6 extends BaseHandler implements HandlerContract
 {
 	/**
 	 * Kompas URL.
@@ -41,7 +41,7 @@ class Kompas extends BaseHandler implements HandlerContract
 	 */
 	public function __construct()
 	{
-		$this->url = "https://www.kompas.com";
+		$this->url = "http://www.liputan6.com/";
 	}
 
 	public function exec()

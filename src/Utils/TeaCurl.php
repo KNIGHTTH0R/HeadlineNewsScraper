@@ -60,6 +60,13 @@ final class TeaCurl
 	private $isExecuted = false;
 
 	/**
+	 * Is initiated?
+	 *
+	 * @var bool
+	 */
+	private $isInitiated = false;
+
+	/**
 	 * Curl result.
 	 *
 	 * @var string
@@ -85,6 +92,7 @@ final class TeaCurl
 			CURLOPT_SSL_VERIFYHOST => false,
 			CURLOPT_FOLLOWLOCATION => false
 		];
+		$this->isInitiated = true;
 	}
 
 	/**
@@ -126,6 +134,7 @@ final class TeaCurl
 	 */
 	public function exec()
 	{
+		$this->init();
 		$this->__exec();
 		return $this->output;
 	}
@@ -146,5 +155,15 @@ final class TeaCurl
 	public function errno()
 	{
 		return $this->errno;
+	}
+
+	public function close()
+	{
+		return $this->isInitiated ? curl_close($this->ch) : false;
+	}
+
+	public function __destruct()
+	{
+		$this->isInitiated and curl_close($this->ch);
 	}
 }

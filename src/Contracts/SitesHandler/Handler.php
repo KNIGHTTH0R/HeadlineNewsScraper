@@ -8,5 +8,7 @@ interface Handler
 
 	public function exec();
 
+	public function parse();
+
 	public function getResult();
 }
