@@ -66,7 +66,8 @@ class CNNIndonesia extends BaseHandler implements HandlerContract
 		unset($b[0]);
 		foreach ($b as $val) {
 			$val = explode("<", $val, 2);
-			empty($val[0]) or $this->result[] = trim(strip_tags(html_entity_decode($val[0], ENT_QUOTES, 'UTF-8')));
+			$val = trim(strip_tags(html_entity_decode($val[0], ENT_QUOTES, 'UTF-8')));
+			empty($val) or $this->result[] = $val;
 		}
 		$this->success = (bool) (sizeof($this->result) - 5);
 	}
