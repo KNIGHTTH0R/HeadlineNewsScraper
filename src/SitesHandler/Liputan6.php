@@ -78,10 +78,11 @@ class Liputan6 extends BaseHandler implements HandlerContract
 					$c = explode("\"", $val, 2);
 					$r[] = $c[0];
 				}
-				// remap
 				foreach (array_unique($r) as $val) {
-					$this->result[] = $val;
+					$val = trim(strip_tags(html_entity_decode($val, ENT_QUOTES, 'UTF-8')));
+					empty($val) or $this->result[] = $val;
 				}
+				$this->result = array_unique($this->result);
 				$this->success = (bool) count($this->result);
 			}
 		}		

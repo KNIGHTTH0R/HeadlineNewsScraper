@@ -4,9 +4,9 @@ require __DIR__ . "/vendor/autoload.php";
 
 $app = new IceTea\HeadlineNewsScraper(
 	//new IceTea\SitesHandler\Detik,
-	//new IceTea\SitesHandler\Liputan6,
-	new IceTea\SitesHandler\Tribunnews
-	// new IceTea\SitesHandler\CNNIndonesia
+	//new IceTea\SitesHandler\Liputan6
+	//new IceTea\SitesHandler\Tribunnews
+	new IceTea\SitesHandler\CNNIndonesia
 );
 
 $app->setInsertAction(function ($instanceName, $results) {

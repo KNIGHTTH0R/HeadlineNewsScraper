@@ -61,10 +61,14 @@ class CNNIndonesia extends BaseHandler implements HandlerContract
 	public function parse()
 	{
 		$a = $this->result;
-		$b = explode("<section id=\"headline\">\"", $a, 2);
-		if (isset($b[1])) {
-			var_dump($b[1]);die;
+		$this->result = [];
+		$b = explode("<h2 class=\"title\">", $a);
+		unset($b[0]);
+		foreach ($b as $val) {
+			$val = explode("<", $val, 2);
+			empty($val[0]) or $this->result[] = trim(strip_tags(html_entity_decode($val[0], ENT_QUOTES, 'UTF-8')));
 		}
+		$this->success = (bool) (sizeof($this->result) - 5);
 	}
 
 	public function isSuccess()
