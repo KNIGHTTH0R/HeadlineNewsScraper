@@ -21,6 +21,8 @@ while (true) {
          * $instanceName    "IceTea\SitesHandler\Liputan6"
          * $results         "Anies Akan Cabut Larangan Motor Lewat Jalan MH Thamrin"
          */
+        $instanceName = explode("\\", $instanceName);
+        $instanceName = end($instanceName);
         foreach ($results as $key => $value) {
             $st->execute(
             [
@@ -28,8 +30,8 @@ while (true) {
                 ":site" => $instanceName,
                 ":title" => $value,
                 ":created_at" => time()
-            ]
-        ) or die($st->errorInfo());
+            ]);
+        ) 
         }
 
         echo $instanceName . " : " . PHP_EOL;
