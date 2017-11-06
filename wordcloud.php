@@ -11,12 +11,12 @@ while ($_st = $st->fetch(PDO::FETCH_NUM)) {
 		isset($container[trim($val)]) and $container[$val]++ or $container[$val] = 1;
 	}
 }
-
+$cont = $container;
 rsort($container);
 $i = 1;
 foreach ($container as $key => $value) {
 	if ($i === 10) {
 		break;
 	}
-	echo ($i++).". {$key} -> ".array_search($value, $container)." kali" . PHP_EOL;
+	echo ($i++).". ".array_search($value, $cont)." -> ".$value." kali" . PHP_EOL;
 }
