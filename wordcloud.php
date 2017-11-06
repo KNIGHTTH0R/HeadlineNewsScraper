@@ -5,8 +5,8 @@ $st->execute();
 
 $container = [];
 
-while ($st = $st->fetch(PDO::FETCH_NUM)) {
-	foreach (explode(" ", $st[0]) as $val) {
+while ($_st = $st->fetch(PDO::FETCH_NUM)) {
+	foreach (explode(" ", $_st[0]) as $val) {
 		$val = strtolower($val);
 		isset($container[trim($val)]) and $container[$val]++ or $container[$val] = 1;
 	}
