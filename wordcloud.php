@@ -12,4 +12,8 @@ while ($_st = $st->fetch(PDO::FETCH_NUM)) {
 	}
 }
 
-print array_search($container, max($container));
+rsort($container);
+$i = 1;
+foreach ($container as $key => $value) {
+	echo ($i++).". {$key} -> {$value} kali";
+}
