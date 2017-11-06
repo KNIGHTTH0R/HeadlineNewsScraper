@@ -1,6 +1,7 @@
 <?php 
 $pdo = new PDO("mysql:host=localhost;dbname=test_aa", "root", "858869123");
 $st = $pdo->prepare("SELECT `title` FROM `news`;");
+$st->execute();
 
 $container = [];
 
