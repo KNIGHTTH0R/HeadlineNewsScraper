@@ -61,12 +61,22 @@ class Detik extends BaseHandler implements HandlerContract
 	public function parse()
 	{
 		$a = $this->result;
+		$this->result = [];
 		$b = explode(" data-action=\"HL\" data-label=\"List Berita\">", $a, 2);
 		if (isset($b[1])) {
 			$b = explode("</h1>", $b[1], 2);
-			$this->result = trim(strip_tags(html_entity_decode($b[0], ENT_QUOTES, 'UTF-8')));
+			$this->result[] = trim(strip_tags(html_entity_decode($b[0], ENT_QUOTES, 'UTF-8')));
 			$this->success = true;
 		}
+
+		$b = explode(" <div class=\"title_lnf\">", $a);
+		unset($b[0]);
+		foreach ($b as $val) {
+			$c = explode("</div>", $val, 2);
+			$this->result[] = trim(strip_tags(html_entity_decode($c[0], ENT_QUOTES, 'UTF-8')));
+		}
+		var_dump($this->result);
+		die;
 	}
 
 	public function isSuccess()
