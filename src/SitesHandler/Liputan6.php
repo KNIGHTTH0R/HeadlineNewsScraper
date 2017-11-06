@@ -46,16 +46,13 @@ class Liputan6 extends BaseHandler implements HandlerContract
 
     public function exec()
     {
-        /*$this->result = parent::__curl_exec(
+        $this->result = parent::__curl_exec(
 			$this->url, 
 			[
 				CURLOPT_COOKIEFILE => data."/cookies/liputan6.ck",
 				CURLOPT_COOKIEJAR => data."/cookies/liputan6.ck",
 			]
-		)['content'];*/
-        
-        // file_put_contents("a.tmp", $this->result);
-        $this->result = file_get_contents("a.tmp");
+		)['content'];
     }
 
     public function parse()

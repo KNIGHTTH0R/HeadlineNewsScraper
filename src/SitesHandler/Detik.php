@@ -46,16 +46,13 @@ class Detik extends BaseHandler implements HandlerContract
 
     public function exec()
     {
-        /*$this->result = parent::__curl_exec(
+        $this->result = parent::__curl_exec(
 			$this->url, 
 			[
 				CURLOPT_COOKIEFILE => data."/cookies/detik.ck",
 				CURLOPT_COOKIEJAR => data."/cookies/detik.ck",
 			]
 		)['content'];
-		
-		file_put_contents("detik.tmp", $this->result);*/
-        $this->result = file_get_contents("detik.tmp");
     }
 
     public function parse()

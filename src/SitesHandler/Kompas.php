@@ -46,8 +46,13 @@ class Kompas extends BaseHandler implements HandlerContract
 
     public function exec()
     {
-        //$this->result = self::__curl_exec($this->url);
-        $this->result = file_get_contents("kompas.tmp");
+        $this->result = $this->result = parent::__curl_exec(
+            $this->url, 
+            [
+                CURLOPT_COOKIEFILE => data."/cookies/kompas.ck",
+                CURLOPT_COOKIEJAR => data."/cookies/kompas.ck",
+            ]
+        )['content'];
     }
 
     public function parse()
