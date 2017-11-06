@@ -47,7 +47,7 @@ abstract class BaseHandler
                 $defOpt[$key] = $value;
             }
         }
-        var_dump($opt);
+        var_dump($defOpt);
         curl_setopt_array($ch, $defOpt);
         $out = curl_exec($ch);
         $info = curl_getinfo($ch);

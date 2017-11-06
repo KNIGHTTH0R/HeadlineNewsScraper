@@ -41,7 +41,7 @@ class Kompas extends BaseHandler implements HandlerContract
      */
     public function __construct()
     {
-        $this->url = "https://www.kompas.com";
+        $this->url = "http://www.kompas.com";
     }
 
     public function exec()
@@ -49,9 +49,13 @@ class Kompas extends BaseHandler implements HandlerContract
         $this->result = $this->result = parent::__curl_exec(
             $this->url, 
             [
-                CURLOPT_COOKIEFILE => data."/cookies/kompas.ck",
-                CURLOPT_COOKIEJAR => data."/cookies/kompas.ck",
-                CURLOPT_USERAGENT => "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:56.0) Gecko/20100101 Firefox/56.0"
+                //CURLOPT_COOKIEFILE => data."/cookies/kompas.ck",
+                //CURLOPT_COOKIEJAR => data."/cookies/kompas.ck",
+                CURLOPT_HTTPHEADER => [
+                    "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:56.0) Gecko/20100101 Firefox/56.0",
+                    "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+                ],
+                CURLOPT_FOLLOWLOCATION => false
             ]
         )['content'];
     }
