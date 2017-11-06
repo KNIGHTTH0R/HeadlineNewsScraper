@@ -1,0 +1,14 @@
+{
+    "name": "ammarfaizi2/headline-news-scrapper",
+    "description": "Headline News Scrapper",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ammar Faizi",
+            "email": "ammarfaizi2@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
