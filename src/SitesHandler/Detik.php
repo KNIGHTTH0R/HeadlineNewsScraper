@@ -75,8 +75,6 @@ class Detik extends BaseHandler implements HandlerContract
 			$c = explode("</div>", $val, 2);
 			$this->result[] = trim(strip_tags(html_entity_decode($c[0], ENT_QUOTES, 'UTF-8')));
 		}
-		var_dump($this->result);
-		die;
 	}
 
 	public function isSuccess()
