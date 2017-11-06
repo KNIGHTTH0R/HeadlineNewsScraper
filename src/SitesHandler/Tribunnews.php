@@ -73,14 +73,23 @@ class Tribunnews extends BaseHandler implements HandlerContract
 						$d = explode("<a href=\"", $val, 2);
 						$d = explode(">", $d[1], 2);
 						$d = explode("<", $d[1], 2);
-						$this->result[] = trim(strip_tags(html_entity_decode($d[0], ENT_QUOTES, 'UTF-8')));
+						$d = trim(strip_tags(html_entity_decode($d[0], ENT_QUOTES, 'UTF-8')));
+						empty($d) or $this->result[] = $d;
 					}
 					$b = explode('<div class="pos_abs ovh hlover" >', $a);
 					foreach ($b as $val) {
-						$c = explode("title=\"", $val, 2);
-						$c = explode("\"", $c[1], 2);
-						 $this->result[] = trim(strip_tags(html_entity_decode($c[0], ENT_QUOTES, 'UTF-8')));
+						$val = explode("title=\"", $val, 2);
+						$val = explode("\"", $val[1], 2);
+						$val = trim(strip_tags(html_entity_decode($val[0], ENT_QUOTES, 'UTF-8')));
+						empty($val) or $this->result[] = $val;
 					}
+					$b = explode("<div class=\"grey2 pt5 f13 ln18 txt-oev-2\">", $a);
+					foreach ($b as $val) {
+						$val = explode("<", $val, 2);
+						$val = trim(strip_tags(html_entity_decode($val[0], ENT_QUOTES, 'UTF-8')));
+						empty($val) or $this->result[] = $val;
+					}
+					$this->result = array_unique($this->result);
 					$this->success = (bool) (sizeof($this->result) - 1);
 				}
 			}
