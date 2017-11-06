@@ -31,23 +31,30 @@ abstract class BaseHandler
 	 * @param string $opt
 	 * @return string
 	 */
-	final protected static function __curl_exec($url, $opt = null)
+	final protected static function __curl_exec($url, $opt)
 	{
-		$ch = new TeaCurl($url);
-		$defaultOpt = [
-			CURLOPT_TIMEOUT 		=> 40,
-			CURLOPT_CONNECTTIMEOUT	=> 15,
-			CURLOPT_FOLLOWLOCATION	=> true
+		$ch = curl_init($url);
+		$defOpt = [
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => false,
+			CURLOPT_CONNECTTIMEOUT => 60,
+			CURLOPT_TIMEOUT => 60,
+			CURLOPT_VERBOSE => true
 		];
 		if (is_array($opt)) {
 			foreach ($opt as $key => $value) {
-				$defaultOpt[$key] = $value;
+				$defOpt[$key] = $value;
 			}
 		}
-		$ch->setOpt($defaultOpt);
-		$out = $ch->exec();
-		$err = $ch->errorInfo() and $out = "Error (".($ch->errno()).") : ".$err;
-		$ch->close();
-		return $out;
+		var_dump($opt);
+		curl_setopt_array($ch, $defOpt);
+		$out = curl_exec($ch);
+		$info = curl_getinfo($ch);
+		$errno = curl_errno($ch) and $out = "Error ({$errno}) : ".curl_error($ch);
+		return [
+			"content" => $out,
+			"info" => $info
+		];
 	}
 }

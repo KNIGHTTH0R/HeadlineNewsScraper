@@ -11,7 +11,7 @@ use IceTea\Contracts\SitesHandler\Handler as HandlerContract;
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
  * @license MIT
  */
-class Liputan6 extends BaseHandler implements HandlerContract
+class Detik extends BaseHandler implements HandlerContract
 {
 	/**
 	 * Kompas URL.
@@ -41,7 +41,7 @@ class Liputan6 extends BaseHandler implements HandlerContract
 	 */
 	public function __construct()
 	{
-		$this->url = "http://www.liputan6.com/";
+		$this->url = "http://www.detik.com/";
 	}
 
 	public function exec()
@@ -49,21 +49,21 @@ class Liputan6 extends BaseHandler implements HandlerContract
 		/*$this->result = parent::__curl_exec(
 			$this->url, 
 			[
-				CURLOPT_COOKIEFILE => data."/cookies/liputan6.ck",
-				CURLOPT_COOKIEJAR => data."/cookies/liputan6.ck",
+				CURLOPT_COOKIEFILE => data."/cookies/detik.ck",
+				CURLOPT_COOKIEJAR => data."/cookies/detik.ck",
 			]
-		)['content'];*/
+		)['content'];
 		
-		// file_put_contents("a.tmp", $this->result);
-		$this->result = file_get_contents("a.tmp");
+		file_put_contents("detik.tmp", $this->result);*/
+		$this->result = file_get_contents("detik.tmp");
 	}
 
 	public function parse()
 	{
 		$a = $this->result;
-		$b = explode("<h2 class=\"headline--main__title\">", $a, 2);
+		$b = explode(" data-action=\"HL\" data-label=\"List Berita\">", $a, 2);
 		if (isset($b[1])) {
-			$b = explode("</h2>", $b[1], 2);
+			$b = explode("</h1>", $b[1], 2);
 			$this->result = trim(html_entity_decode($b[0], ENT_QUOTES, 'UTF-8'));
 			$this->success = true;
 		}
