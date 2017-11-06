@@ -18,5 +18,5 @@ foreach ($container as $key => $value) {
 	if ($i === 10) {
 		break;
 	}
-	echo ($i++).". {$key} -> {$value} kali" . PHP_EOL;
+	echo ($i++).". {$key} -> ".array_search($value, $container)." kali" . PHP_EOL;
 }
