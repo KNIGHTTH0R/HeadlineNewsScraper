@@ -21,15 +21,16 @@ while (true) {
          * $instanceName    "IceTea\SitesHandler\Liputan6"
          * $results         "Anies Akan Cabut Larangan Motor Lewat Jalan MH Thamrin"
          */
-        
-        $st->execute(
+        foreach ($results as $key => $value) {
+            $st->execute(
             [
-                ":hash" => sha1($result),
+                ":hash" => sha1($value),
                 ":site" => $instanceName,
-                ":title" => $result,
+                ":title" => $value,
                 ":created_at" => time()
             ]
         ) or die($st->errorInfo());
+        }
 
         echo $instanceName . " : " . PHP_EOL;
         $i = 1;
