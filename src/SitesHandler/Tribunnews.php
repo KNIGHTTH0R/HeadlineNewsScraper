@@ -11,7 +11,7 @@ use IceTea\Contracts\SitesHandler\Handler as HandlerContract;
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
  * @license MIT
  */
-class Liputan6 extends BaseHandler implements HandlerContract
+class Tribunnews extends BaseHandler implements HandlerContract
 {
 	/**
 	 * Kompas URL.
@@ -41,7 +41,7 @@ class Liputan6 extends BaseHandler implements HandlerContract
 	 */
 	public function __construct()
 	{
-		$this->url = "http://www.liputan6.com/";
+		$this->url = "http://www.tribunnews.com/";
 	}
 
 	public function exec()
@@ -55,17 +55,28 @@ class Liputan6 extends BaseHandler implements HandlerContract
 		)['content'];*/
 		
 		// file_put_contents("a.tmp", $this->result);
-		$this->result = file_get_contents("a.tmp");
+		$this->result = file_get_contents("tribun.tmp");
 	}
 
 	public function parse()
 	{
-		$a = $this->result;
-		$b = explode("<h2 class=\"headline--main__title\">", $a, 2);
+		$b = explode("<div id=\"topil\" class=\"\">", $this->result, 2);
+		$this->result = [];
 		if (isset($b[1])) {
-			$b = explode("</h2>", $b[1], 2);
-			$this->result = trim(strip_tags(html_entity_decode($b[0], ENT_QUOTES, 'UTF-8')));
-			$this->success = true;
+			$b = explode("<script type=\"text/javascript\">", $b[1], 2);
+			if (isset($b[1])) {
+				$c = explode("<div id=\"topik_", $b[0]);
+				unset($c[0]);
+				if (isset($c[1], $c[2])) {
+					foreach ($c as $val) {
+						$d = explode("<a href=\"", $val, 2);
+						$d = explode(">", $d[1], 2);
+						$d = explode("<", $d[1], 2);
+						$this->result[] = trim(strip_tags(html_entity_decode($d[0], ENT_QUOTES, 'UTF-8')));
+					}
+					$this->success = (bool) (sizeof($this->result) - 1);
+				}
+			}
 		}
 	}
 
