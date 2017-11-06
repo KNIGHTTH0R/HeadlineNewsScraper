@@ -15,5 +15,8 @@ while ($_st = $st->fetch(PDO::FETCH_NUM)) {
 rsort($container);
 $i = 1;
 foreach ($container as $key => $value) {
-	echo ($i++).". {$key} -> {$value} kali";
+	if ($i === 10) {
+		break;
+	}
+	echo ($i++).". {$key} -> {$value} kali" . PHP_EOL;
 }
