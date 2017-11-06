@@ -51,6 +51,7 @@ class Kompas extends BaseHandler implements HandlerContract
             [
                 CURLOPT_COOKIEFILE => data."/cookies/kompas.ck",
                 CURLOPT_COOKIEJAR => data."/cookies/kompas.ck",
+                CURLOPT_USERAGENT => "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:56.0) Gecko/20100101 Firefox/56.0"
             ]
         )['content'];
     }
