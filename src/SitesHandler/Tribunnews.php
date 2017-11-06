@@ -60,7 +60,8 @@ class Tribunnews extends BaseHandler implements HandlerContract
 
 	public function parse()
 	{
-		$b = explode("<div id=\"topil\" class=\"\">", $this->result, 2);
+		$a = $this->result;
+		$b = explode("<div id=\"topil\" class=\"\">", $a, 2);
 		$this->result = [];
 		if (isset($b[1])) {
 			$b = explode("<script type=\"text/javascript\">", $b[1], 2);
@@ -73,6 +74,12 @@ class Tribunnews extends BaseHandler implements HandlerContract
 						$d = explode(">", $d[1], 2);
 						$d = explode("<", $d[1], 2);
 						$this->result[] = trim(strip_tags(html_entity_decode($d[0], ENT_QUOTES, 'UTF-8')));
+					}
+					$b = explode('<div class="pos_abs ovh hlover" >', $a);
+					foreach ($b as $val) {
+						$c = explode("title=\"", $val, 2);
+						$c = explode("\"", $c[1], 2);
+						 $this->result[] = trim(strip_tags(html_entity_decode($c[0], ENT_QUOTES, 'UTF-8')));
 					}
 					$this->success = (bool) (sizeof($this->result) - 1);
 				}
