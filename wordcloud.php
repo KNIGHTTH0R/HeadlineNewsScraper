@@ -15,8 +15,8 @@ $cont = $container;
 rsort($container);
 $i = 1;
 foreach ($container as $key => $value) {
+	echo ($i++).". ".array_search($value, $cont)." -> ".$value." kali" . PHP_EOL;
 	if ($i === 10) {
 		break;
 	}
-	echo ($i++).". ".array_search($value, $cont)." -> ".$value." kali" . PHP_EOL;
 }
