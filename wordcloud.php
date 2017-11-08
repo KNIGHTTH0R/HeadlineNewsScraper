@@ -4,7 +4,10 @@ $st = $pdo->prepare("SELECT `title` FROM `news`;");
 $st->execute();
 
 $container = [];
-$exclude = file("stopwordbahasa.csv");
+$exclude = explode("\n",file_get_contents("stopwordbahasa.csv"));
+array_walk($exclude, function(&$a){
+	$a = trim($a);
+});
 while ($_st = $st->fetch(PDO::FETCH_NUM)) {
 	foreach (explode(" ", $_st[0]) as $val) {
 		$val = strtolower($val);
