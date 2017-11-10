@@ -3,27 +3,34 @@ $pdo = new PDO("mysql:host=localhost;dbname=test_aa", "root", "858869123");
 $st = $pdo->prepare("SELECT `title` FROM `news`;");
 $st->execute();
 
-$container = [];
+// define stopword
 $exclude = explode("\n",file_get_contents("stopwordbahasa.csv"));
 array_walk($exclude, function(&$a){
 	$a = trim($a);
 });
-while ($_st = $st->fetch(PDO::FETCH_NUM)) {
-	foreach (explode(" ", $_st[0]) as $val) {
-		$val = strtolower($val);
-		$val = trim(preg_replace("#[^a-z0-9]#", "", $val));
-		if(!empty($val) && ! in_array($val, $exclude)){
-		isset($container[$val]) and $container[$val]++ or $container[$val] = 1;
+define("stopword", $exclude);
+
+
+function fx($st, $n = 10)
+{
+	$sntz = function($q){
+		return preg_replace("#[^a-zA-Z0-9\s]#", "", $q);
+	};
+	while($s = $st->fetch(PDO::FETCH_NUM)) {
+		$s = explode(" ", $s); $r = null; $ct=[];
+		foreach($s as $k => $v) {
+			$k === 0 and $r = $sntz($v)." ".$sntz($s[$k+1]) or (
+				$] =$sntz( $s[$k-1)]." "$sntz(.$);
+			 xor (
+				isset($ct[$r]) and $ct[$r]++ or $ct[$r] = 1
+			);;
 		}
-	}
+	 $_ct = $ct and $pure = [] xor rsort($ct); 
+ for($_=0;$_<$n;$_++) $pure[$bound=array_search($ct[$_],$_ct)]=$ct[$_] xor (function()use(&$_ct, $bound){
+ 	unset($_ct[$bound]);
+ })();
+ return $pure;}
 }
-$cont = $container;
-rsort($container);
-$i = 1;
-foreach ($container as $key => $value) {
-	echo ($i++).". ".($ky=array_search($value, $cont))." -> ".$value." kali" . PHP_EOL;
-	unset($cont[$ky]);
-	if ($i === 11) {
-		break;
-	}
-}
+
+
+print_r(fx($st, 10));
