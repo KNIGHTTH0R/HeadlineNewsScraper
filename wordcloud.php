@@ -19,11 +19,12 @@ function fx($st, $n = 10)
 	while($s = $st->fetch(PDO::FETCH_NUM)) {
 		$s = explode(" ", $s); $r = null; $ct=[];
 		foreach($s as $k => $v) {
-			$k === 0 and $r = $sntz($v)." ".$sntz($s[$k+1]) or (
-				$] =$sntz( $s[$k-1)]." "$sntz(.$);
-			 xor (
-				isset($ct[$r]) and $ct[$r]++ or $ct[$r] = 1
-			);;
+			$k === 0 and 
+			$r = $sntz($v)." ".$sntz($s[$k+1]) or 
+			(
+				$r =$sntz( $s[$k-1] )." ".$sntz($v)
+			 ) xor (
+	isset($ct[$r]) and $ct[$r]++ or $ct[$r] = 1);
 		}
 	 $_ct = $ct and $pure = [] xor rsort($ct); 
  for($_=0;$_<$n;$_++) $pure[$bound=array_search($ct[$_],$_ct)]=$ct[$_] xor (function()use(&$_ct, $bound){
