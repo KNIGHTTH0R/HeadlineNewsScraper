@@ -16,9 +16,9 @@ function fx($st, $n = 10)
 	$sntz = function(&$q){
 		if(!isset($q)) return "";
 		return strtolower(preg_replace("#[^a-zA-Z0-9\s]#", "", $q));
-	};
+	};$ct=[];
 	while($s = $st->fetch(PDO::FETCH_NUM)) {
-		$s = explode(" ", $s[0]); $r = null; $ct=[];
+		$s = explode(" ", $s[0]); $r = null; 
 		foreach($s as $k => $v) {
 			$k === 0 and 
 			$r = $sntz($v)." ".$sntz($s[$k+1]) or 
