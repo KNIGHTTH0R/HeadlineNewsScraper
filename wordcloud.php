@@ -14,7 +14,7 @@ define("stopword", $exclude);
 function fx($st, $n = 10)
 {
 	$sntz = function($q){
-		return preg_replace("#[^a-zA-Z0-9\s]#", "", $q);
+		return strtolower(preg_replace("#[^a-zA-Z0-9\s]#", "", $q));
 	};
 	while($s = $st->fetch(PDO::FETCH_NUM)) {
 		$s = explode(" ", $s[0]); $r = null; $ct=[];
@@ -25,12 +25,12 @@ function fx($st, $n = 10)
 				$r =$sntz( $s[$k-1] )." ".$sntz($v)
 			 ) xor (
 	isset($ct[$r]) and $ct[$r]++ or $ct[$r] = 1);
-		}
+		}}
 	 $_ct = $ct and $pure = [] xor rsort($ct); 
  for($_=0;$_<$n;$_++) $pure[$bound=array_search($ct[$_],$_ct)]=$ct[$_] xor (function()use(&$_ct, $bound){
  	unset($_ct[$bound]);
  })();
- return $pure;}
+ return $pure;
 }
 
 
