@@ -27,7 +27,6 @@ function fx($st, $n = 10)
 			 ) xor (
 	isset($ct[$r]) and $ct[$r]++ or $ct[$r] = 1);
 		}}
-		print_r($ct);die;
 	 $_ct = $ct and $pure = [] xor rsort($ct); 
  for($_=0;$_<$n;$_++) $pure[$bound=array_search($ct[$_],$_ct)]=$ct[$_] xor (function()use(&$_ct, $bound){
  	unset($_ct[$bound]);
