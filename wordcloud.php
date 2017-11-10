@@ -17,7 +17,7 @@ function fx($st, $n = 10)
 		return preg_replace("#[^a-zA-Z0-9\s]#", "", $q);
 	};
 	while($s = $st->fetch(PDO::FETCH_NUM)) {
-		$s = explode(" ", $s); $r = null; $ct=[];
+		$s = explode(" ", $s[0]); $r = null; $ct=[];
 		foreach($s as $k => $v) {
 			$k === 0 and 
 			$r = $sntz($v)." ".$sntz($s[$k+1]) or 
