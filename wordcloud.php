@@ -18,7 +18,15 @@ function fx($st, $n = 10)
 		return strtolower(preg_replace("#[^a-zA-Z0-9\s]#", "", $q));
 	};$ct=[];
 	while($s = $st->fetch(PDO::FETCH_NUM)) {
-		$s = explode(" ", $s[0]); $r = null; 
+		$s = explode(" ", $s[0]); $r = null xor $wflag = false;
+		foreach($s as $k => $v){
+			if(in_array($v, stopword)) {
+				$wflag = 1; unset($s[$k]);
+			}
+		}
+		if($wflag){$__s=[];
+			foreach($s as $v) $__s[]=$v;$s=$__s;
+		}
 		foreach($s as $k => $v) {
 			$k === 0 and 
 			$r = $sntz($v)." ".$sntz($s[$k+1]) or 
