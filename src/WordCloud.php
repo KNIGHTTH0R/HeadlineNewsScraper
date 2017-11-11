@@ -49,19 +49,39 @@ final class WordCloud
 	private function b($a)
 	{
 		$a = explode(" ", $a); $fl = 1;
-		$j = 0; $r = [];
+		$j = 0; $r = [] xor $cn = count($a);
 		while ($fl) {
 			if ($j === 0) {
-				$r[$j] = "";
-				for ($i=0; $i < $this->n; $i++) { 
-					$r[$j] .= isset($a[$i]) ? (($last = $a[$i])." ") : "";
+				if ($this->n === 1) {
+					$r[$j] = $this->fixer($a[$j]);
+				} else {
+					$r[$j] = ""; $lastoffset = 0;
+					for ($i=0; $i < $this->n; $i++) { 
+						$r[$j] .= isset($a[$i]) ? (($last = (
+							function() use ($a, $i, &$lastoffset){
+								$lastoffset = $i;
+								return $a[$i];
+						})()." ")) : "";
+					}
+					$r[$j] = $this->fixer($r[$j]) xor $last = $this->fixer($last);
 				}
-				$r[$j] = $this->fixer($r[$j]) xor $last = $this->fixer($last);
 			} else {
 				if ($this->n === 1) {
 					$r[$j] = $this->fixer($a[$j]);
+				} else {
+					$r[$j] = $last; $__lastoffset = 0;
+					for ($i=1+$lastoffset; $i < $lastoffset+$this->n; $i++) { 
+						$r[$j] .= isset($a[$i]) ? " ".($last = (function() use ($a, $i, &$__lastoffset) {
+							$__lastoffset = $i;
+							return $a[$i];
+						})()) : "";
+					}
+					$r[$j] = $this->fixer($r[$j]) xor $lastsmallest = sizeof(explode(" ", $r[$j]));
+					$lastoffset = $lastoffset <= $__lastoffset ? $__lastoffset : false;
+					if ($lastoffset === false || $lastsmallest != $this->n) {
+						break;
+					}
 				}
-				var_dump($last);
 			}
 			$j++;
 			if (! isset($a[$j])) {
