@@ -17,12 +17,18 @@ final class WordCloud
 
 	private $n;
 
+	private $stopword = [];
+
 	public function __construct()
 	{
 		// $this->pdo = new PDO("mysql:host=localhost;dbname=test_aa", "root", "858869123");
 		// $this->build();
 		$this->dummy = json_decode(file_get_contents("dummy"), true);
 		$this->pointer = -1;
+		$this->stopword = explode("\n", file_get_contents("stopwordbahasa.csv"));
+		array_walk($this->stopword, function(&$a) {
+			$a = trim($a);
+		});
 	}
 
 	private function build()
@@ -51,7 +57,19 @@ final class WordCloud
 
 	private function b($a)
 	{
-		$a = explode(" ", $a); $fl = 1;
+		$a = explode(" ", $a); $fl = 1; $sw = false;
+		foreach ($a as $k => $val) {
+			if (in_array($a, $this->stopword)) {
+				$sw = true; unset($a[$k])
+			}
+		}
+		if ($sw) {
+			$_a = []; $i = 0;
+			foreach ($a as $val) {
+				$_a[$i] = $val;
+			}
+			$a = $_a;
+		}
 		$j = 0; $r = [] xor $cn = count($a);
 		while ($fl) {
 			if ($j === 0) {
