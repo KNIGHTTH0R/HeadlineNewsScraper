@@ -88,7 +88,7 @@ final class WordCloud
 				$fl = 0;
 			}
 		}
-		var_dump($r);die;
+		var_dump($r);
 	}
 
 	private function fixer($str)
