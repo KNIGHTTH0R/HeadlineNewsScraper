@@ -30,7 +30,8 @@ final class WordCloud
 	private function wd()
 	{
 		while ($st = $this->pdoSt->fetch(PDO::FETCH_NUM)) {
-			print $st[0] . PHP_EOL;
+			$data[] = $st;
 		}
+		file_put_contents("dummy", json_encode($data));
 	}
 }
