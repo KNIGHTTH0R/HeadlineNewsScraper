@@ -1,22 +1,6 @@
-<?php 
-$pdo = new PDO("mysql:host=localhost;dbname=test_aa", "root", "858869123");
-$st = $pdo->prepare("SELECT `title` FROM `news`;");
-$st->execute();
+<?php
 
-$container = [];
+require __DIR__."/vendor/autoload.php";
 
-while ($_st = $st->fetch(PDO::FETCH_NUM)) {
-	foreach (explode(" ", $_st[0]) as $val) {
-		$val = strtolower($val);
-		isset($container[trim($val)]) and $container[$val]++ or $container[$val] = 1;
-	}
-}
-$cont = $container;
-rsort($container);
-$i = 1;
-foreach ($container as $key => $value) {
-	echo ($i++).". ".array_search($value, $cont)." -> ".$value." kali" . PHP_EOL;
-	if ($i === 10) {
-		break;
-	}
-}
+$app = new \IceTea\WordCloud();
+$app(2);
