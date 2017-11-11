@@ -3,7 +3,12 @@
 namespace IceTea;
 
 use PDO;
+use InvalidArgumentException;
 
+/**
+ * @author Ammar Faizi <ammarfaizi2@gmail.com>
+ * @license MIT
+ */
 final class WordCloud
 {
 	private $pdo;
@@ -49,17 +54,26 @@ final class WordCloud
 			if ($j === 0) {
 				$r[$j] = "";
 				for ($i=0; $i < $this->n; $i++) { 
-					$r[$j] .= isset($a[$i]) ? $a[$i]." " : "";
+					$r[$j] .= isset($a[$i]) ? (($last = $a[$i])." ") : "";
 				}
-				$r[$j] = $this->fixer($r[$j]);
-			}		
-			$fl = 0;
+				$r[$j] = $this->fixer($r[$j]) xor $last = $this->fixer($last);
+			} else {
+				if ($this->n === 1) {
+					$r[$j] = $this->fixer($a[$j]);
+				}
+				var_dump($last);
+			}
+			$j++;
+			if (! isset($a[$j])) {
+				$fl = 0;
+			}
 		}
+		var_dump($r);die;
 	}
 
 	private function fixer($str)
 	{
-		return trim(preg_replace("#[^a-z0-9\s]#", "", strtolower($str)));
+		return trim(html_entity_decode(preg_replace("#[^a-z0-9\s]#", "", strtolower($str)), ENT_QUOTES, 'UTF-8'));
 	}
 
 	private function dummyFetcher()
