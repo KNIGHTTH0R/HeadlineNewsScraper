@@ -40,9 +40,12 @@ final class WordCloud
 	private function wd()
 	{
 		// $st = $this->pdoSt->fetch(PDO::FETCH_NUM)
-		$r = [];
+		$r = []; $i = 1;
 		while ($st = $this->dummyFetcher()) {
 			$r[] = $this->b($st[0]);
+			if ($i++ == 10) {
+				break;
+			}
 		}
 	}
 
@@ -78,6 +81,10 @@ final class WordCloud
 					}
 					$r[$j] = $this->fixer($r[$j]) xor $lastsmallest = sizeof(explode(" ", $r[$j]));
 					$lastoffset = $lastoffset <= $__lastoffset ? $__lastoffset : false;
+					$q = explode(" ", $r[$j-1]);
+					if ($lastsmallest === 1 && $this->n > 2 || $r[$j] === end($q)) {
+						unset($r[$j]);
+					}
 					if ($lastoffset === false || $lastsmallest != $this->n) {
 						break;
 					}
@@ -88,7 +95,17 @@ final class WordCloud
 				$fl = 0;
 			}
 		}
-		var_dump($r);
+		print "Sentence : " . strtolower(implode(" ", $a) . PHP_EOL);
+		print "Result : " . PHP_EOL;
+		foreach ($r as $k => $val) {
+			print "  ".($k+1). ". ".$val . PHP_EOL;
+		}
+		print PHP_EOL;
+		for ($i=0; $i < 5; $i++) { 
+			print ".";
+			sleep(1);
+		}
+		print PHP_EOL . PHP_EOL . PHP_EOL;
 	}
 
 	private function fixer($str)
