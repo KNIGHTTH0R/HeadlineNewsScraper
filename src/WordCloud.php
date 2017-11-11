@@ -57,16 +57,18 @@ final class WordCloud
 
 	private function b($a)
 	{
+		$pure = strtolower($a);
 		$a = explode(" ", $a); $fl = 1; $sw = false;
 		foreach ($a as $k => $val) {
-			if (in_array($a, $this->stopword)) {
-				$sw = true; unset($a[$k])
+			if (in_array($val, $this->stopword)) {
+				print $a[$k]. " ";
+				$sw = true; unset($a[$k]);
 			}
 		}
 		if ($sw) {
 			$_a = []; $i = 0;
 			foreach ($a as $val) {
-				$_a[$i] = $val;
+				$_a[$i++] = $val;
 			}
 			$a = $_a;
 		}
@@ -113,7 +115,7 @@ final class WordCloud
 				$fl = 0;
 			}
 		}
-		print "Sentence : " . strtolower(implode(" ", $a) . PHP_EOL);
+		print "Sentence : " . strtolower($pure) . PHP_EOL;
 		print "Result : " . PHP_EOL;
 		foreach ($r as $k => $val) {
 			print "  ".($k+1). ". ".$val . PHP_EOL;
