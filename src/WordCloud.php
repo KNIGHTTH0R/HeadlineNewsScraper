@@ -38,6 +38,12 @@ final class WordCloud
 
 	public function __invoke($arg)
 	{
+		$arg = trim($arg);
+		if (! is_numeric($arg)) {
+			throw new InvalidArgumentException("argv is not numeric", 1);
+		} elseif (($arg = (int)$arg) < 1) {
+			throw new InvalidArgumentException("argv should greater than 0", 1);
+		}
 		$this->n = $arg;
 		// $this->pdoSt->execute();
 		$this->wd();
