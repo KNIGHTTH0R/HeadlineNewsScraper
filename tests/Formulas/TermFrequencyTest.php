@@ -16,7 +16,6 @@ class TermFrequencyTest extends TestCase
 		*/
 		$needle_count = 5;
 		$haystack_count = 100;
-		die;
 		$this->assertEquals(
 			Formula::TermFrequency($needle_count, $haystack_count)(), 0.05
 		);
