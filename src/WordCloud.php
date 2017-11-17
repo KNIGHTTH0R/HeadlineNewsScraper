@@ -72,10 +72,14 @@ final class WordCloud
 	{
 		$pure = strtolower($a);
 		$a = explode(" ", $a); $fl = 1; $sw = false;
-		foreach ($a as $k => $val) {
+		foreach ($a as $k => &$val) {
+			$val = $this->fixer($val);
 			if (in_array($val, $this->stopword)) {
 				$sw = true; unset($a[$k]);
 			}
+		}
+		if ($this->n === 1) {
+			return $a;
 		}
 		if ($sw) {
 			$_a = []; $i = 0;
