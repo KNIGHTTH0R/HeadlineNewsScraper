@@ -21,9 +21,9 @@ final class WordCloud
 
 	public function __construct()
 	{
-		// $this->pdo = new PDO("mysql:host=localhost;dbname=test_aa", "root", "858869123");
-		// $this->build();
-		$this->dummy = json_decode(file_get_contents("dummy"), true);
+		$this->pdo = new PDO("mysql:host=localhost;dbname=test_aa", "root", "858869123");
+		$this->build();
+		// $this->dummy = json_decode(file_get_contents("dummy"), true);
 		$this->pointer = -1;
 		$this->stopword = explode("\n", file_get_contents("stopwordbahasa.csv"));
 		array_walk($this->stopword, function(&$a) {
@@ -45,15 +45,14 @@ final class WordCloud
 			throw new InvalidArgumentException("argv should greater than 0", 1);
 		}
 		$this->n = $arg;
-		// $this->pdoSt->execute();
+		$this->pdoSt->execute();
 		$this->wd();
 	}
 
 	private function wd()
 	{
-		// $st = $this->pdoSt->fetch(PDO::FETCH_NUM)
 		$r = []; $i = 1;
-		while ($st = $this->dummyFetcher()) {
+		while ($st = $this->pdoSt->fetch(PDO::FETCH_NUM)) {
 			foreach ($this->b($st[0]) as $val) {
 				str_replace(" ", "", $val, $n);
 				if ($n === $this->n - 1) {
