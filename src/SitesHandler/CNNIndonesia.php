@@ -47,12 +47,12 @@ class CNNIndonesia extends BaseHandler implements HandlerContract
     public function exec()
     {
         $this->result = parent::__curl_exec(
-			$this->url, 
-			[
-				CURLOPT_COOKIEFILE => data."/cookies/cnnindonesia.ck",
-				CURLOPT_COOKIEJAR => data."/cookies/cnnindonesia.ck",
-			]
-		)['content'];
+            $this->url,
+            [
+                CURLOPT_COOKIEFILE => data."/cookies/cnnindonesia.ck",
+                CURLOPT_COOKIEJAR => data."/cookies/cnnindonesia.ck",
+            ]
+        )['content'];
         
         // file_put_contents("a.tmp", $this->result);
         //$this->result = file_get_contents("cnn.tmp");

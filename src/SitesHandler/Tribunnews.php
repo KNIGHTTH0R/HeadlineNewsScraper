@@ -47,12 +47,12 @@ class Tribunnews extends BaseHandler implements HandlerContract
     public function exec()
     {
         $this->result = parent::__curl_exec(
-			$this->url, 
-			[
-				CURLOPT_COOKIEFILE => data."/cookies/tribunnews.ck",
-				CURLOPT_COOKIEJAR => data."/cookies/tribunnews.ck",
-			]
-		)['content'];
+            $this->url,
+            [
+                CURLOPT_COOKIEFILE => data."/cookies/tribunnews.ck",
+                CURLOPT_COOKIEJAR => data."/cookies/tribunnews.ck",
+            ]
+        )['content'];
     }
 
     public function parse()
