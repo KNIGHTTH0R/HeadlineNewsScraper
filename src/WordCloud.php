@@ -54,10 +54,18 @@ final class WordCloud
 		// $st = $this->pdoSt->fetch(PDO::FETCH_NUM)
 		$r = []; $i = 1;
 		while ($st = $this->dummyFetcher()) {
-			$r[] = $this->b($st[0]);
-			if ($i++ == 10) {
-				break;
+			foreach ($this->b($st[0]) as $val) {
+				str_replace(" ", "", $val, $n);
+				if ($n === $this->n - 1) {
+					isset($r[$val]) and $r[$val]++ or $r[$val] = 1;
+				}
 			}
+		}
+		$backup = $r;
+		rsort($r);
+		for($i=0;$i<10;$i++){
+			echo "  ".($i+1).". ".($value_to_unset = array_search($r[$i], $backup))." -> ".$r[$i] . PHP_EOL;
+			unset($value_to_unset);
 		}
 	}
 
@@ -67,7 +75,6 @@ final class WordCloud
 		$a = explode(" ", $a); $fl = 1; $sw = false;
 		foreach ($a as $k => $val) {
 			if (in_array($val, $this->stopword)) {
-				print $a[$k]. " ";
 				$sw = true; unset($a[$k]);
 			}
 		}
@@ -121,17 +128,7 @@ final class WordCloud
 				$fl = 0;
 			}
 		}
-		print "Sentence : " . strtolower($pure) . PHP_EOL;
-		print "Result : " . PHP_EOL;
-		foreach ($r as $k => $val) {
-			print "  ".($k+1). ". ".$val . PHP_EOL;
-		}
-		print PHP_EOL;
-		for ($i=0; $i < 5; $i++) { 
-			print ".";
-			sleep(1);
-		}
-		print PHP_EOL . PHP_EOL . PHP_EOL;
+		return $r;
 	}
 
 	private function fixer($str)
