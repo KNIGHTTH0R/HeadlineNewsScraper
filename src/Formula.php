@@ -4,7 +4,7 @@ namespace IceTea;
 
 class Formula
 {
-	public function __callStatic($method, $param)
+	public static function __callStatic($method, $param)
 	{
 		$classname = "\\IceTea\\Formulas\\{$method}";
 		if (class_exists($classname)) {

@@ -8,11 +8,17 @@ class BaseFormula
 	{
 		$this->classname = $classname;
 		$this->param = $param;
+		$this->st = new $this->classname(...$param);
 	}
 
 	public function __call($method, $param)
 	{
-		$st = new $this->classname(...$this->param);
 		return $st->{$method}(...$param);
+	}
+
+	public function __invoke()
+	{
+		$st = $this->st;
+		return $st(...$this->param);
 	}
 }

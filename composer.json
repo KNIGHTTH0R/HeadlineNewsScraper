@@ -16,7 +16,8 @@
     },
     "autoload": {
         "psr-4": {
-            "IceTea\\": "src/"
+            "IceTea\\": "src/",
+            "tests\\": "tests/"
         },
         "files": [
             "config.php"
