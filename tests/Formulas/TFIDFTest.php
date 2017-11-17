@@ -61,10 +61,10 @@ class TFIDFTest extends TestCase
 	private $totalKataKucing = 100;
 
 	protected function setup()
-    {
+	{
         $this->tf = Formula::TermFrequency($this->kataKucing, $this->jumlahKata)();
         $this->idf = Formula::InverseDocumentFrequency($this->totalKataKucing, $this->totalJumlahDokumen)();
-    }
+	}
 
 	public function testTF()
 	{
